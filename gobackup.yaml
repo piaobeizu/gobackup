@@ -1,0 +1,38 @@
+# gobackup config example
+# -----------------------
+# Put this file in follow place:
+# ~/.gobackup/gobackup.yml or /etc/gobackup/gobackup.yml
+web:
+  username: gobackup
+  password: 123456
+models:
+  dexforce-dexverse:
+    description: "This is base test."
+    schedule:
+      # At 04:05 on Sunday.
+      cron: "* */1 * * *"
+    compress_with:
+      type: tgz
+    default_storage: local
+    storages:
+      local:
+        type: local
+        keep: 10
+        path: /backup/gobackup
+    databases:
+      juicefs:
+        src_url: "redis://:123456@192.168.3.72:16379/14"
+        backup_dir: ./MixedAI/docker_packages/opencv
+        update_force: false
+        # includes: 
+        # excludes: 
+        #   - .trash
+        threads: 10
+    archive:
+      # includes:
+      #   - /home/ubuntu/.ssh/
+      #   - /etc/nginx/nginx.conf
+      #   - /etc/redis/redis.conf
+      #   - /etc/logrotate.d/
+      excludes:
+        - /backup/gobackup/.trash

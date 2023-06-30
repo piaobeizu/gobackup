@@ -32,7 +32,7 @@ func Exec(command string, args ...string) (output string, err error) {
 	if err != nil {
 		return "", fmt.Errorf("%s cannot be found", command)
 	}
-
+	fmt.Printf("cmd: %s %s\n", fullCommand, strings.Join(commandArgs, " "))
 	cmd := exec.Command(fullCommand, commandArgs...)
 	cmd.Env = os.Environ()
 
